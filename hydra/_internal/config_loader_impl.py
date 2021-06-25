@@ -519,6 +519,10 @@ class ConfigLoaderImpl(ConfigLoader):
                     raise ConfigCompositionException(
                         f"In '{default.config_path}': Validation error while composing config:\n{e}"
                     ).with_traceback(sys.exc_info()[2])
+                except ConfigKeyError as e:
+                    raise ConfigCompositionException(
+                        f"Config key error while merging default '{default.config_path}':\n{e}"
+                    ).with_traceback(sys.exc_info()[2])
 
         return cfg
 
